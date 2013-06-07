@@ -76,18 +76,18 @@ while true; do
     case $1 in
 		-f|--filesource)
 			shift
-    	    FILE_SOURCE=$1
-    	    shift
-    	    ;;
-    	-s|--suffix)
-    		shift
-    		#set suffix
+    	    		FILE_SOURCE=$1
+    	    		shift
+    	    		;;
+    		-s|--suffix)
+    			shift
+    			#set suffix
 			SUFFIX=$1
-    		shift
-    		;;
-    	-p|--prefix)
-    		shift
-    		#set prefix
+    			shift
+    			;;
+    		-p|--prefix)
+    			shift
+    			#set prefix
 			PREFIX=$1
 			shift
 			;;
@@ -120,11 +120,11 @@ while true; do
     		DEBUG_OUTPUT=1
     		shift
     		;;
-        -h|--help)
-            usage
-            exit
-            ;;
-        *)
+        	-h|--help)
+            		usage
+            		exit
+            	;;
+        	*)
             break
             ;;
     esac
