@@ -1,10 +1,11 @@
 splitter
 ========
 
-splitter is a shell script that split a file in more part (using split command). With splitter you can set header/footer, prefix/suffix and apply a sed pattern for replace recursively every row in source file  
+splitter is a shell script that split a file in more part (using split command). 
+With splitter you can set header/footer, prefix/suffix and apply a sed rule for replace a pattern recursively in every row in source file  
 
 NAME
-  	    splitter.sh - split a file in more parts
+  	splitter.sh - split a file in more parts
 
 SYNOPSIS
         $0 [OPTIONS]
