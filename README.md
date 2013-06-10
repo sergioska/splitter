@@ -14,7 +14,7 @@ DESCRIPTION
 
         The script create more files
         
-        Ex.: ./splitter.sh -f annuncidaimportare.csv -s .php -p k_ -l 10000 -r 's/;/,/' -t "<?php \$aIds=array(" -b ");" -d
+        Ex.: ./splitter.sh -f annuncidaimportare.csv -s .php -p k_ -l 10000 -r 's/;/,/' -t "<?php \$aIds=array(" -b ");" -z 3 -d
         
 		-s, --suffix
 			Set a suffix [optional]
@@ -36,6 +36,9 @@ DESCRIPTION
 		
 		-b, --bottom
 			Set a file footer (it's apply to every generated file) [optional]
+
+		-z, --zero-padding
+			Set how long zero padding (it's apply to every generated file) [optional]
 			
 		-d, --debug
 			Output more info about execution [optional]
