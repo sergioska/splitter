@@ -3,7 +3,7 @@
 # splitter.sh - split a file into more parts
 # Copyright (C) 2013 Sergio Sicari
 #
-# Ex.: ./splitter.sh -f annuncidaimportare.csv -s .php -p k_ -l 10000 -r 's/;/,/' -t "<?php \$aIds=array(" -b ");" -b ");" -d
+# Ex.: ./splitter.sh -f annuncidaimportare.csv -s .php -p k_ -l 10000 -r 's/;/,/' -t "<?php \$aIds=array(" -b ");" -b ");" -z 3 -d
 
 function usage(){
 cat << EOF
@@ -15,7 +15,7 @@ SYNOPSIS
 
 DESCRIPTION
         The script create more files
-        Ex.: ./splitter.sh -f annuncidaimportare.csv -s .php -p k_ -l 10000 -r 's/;/,/' -t "<?php \$aIds=array(" -b ");" -d
+        Ex.: ./splitter.sh -f annuncidaimportare.csv -s .php -p k_ -l 10000 -r 's/;/,/' -t "<?php \$aIds=array(" -b ");" -z 3 -d
         
 		-s, --suffix
 			Set a suffix [optional]
@@ -37,6 +37,9 @@ DESCRIPTION
 		
 		-b, --bottom
 			Set a file footer (it's apply to every generated file) [optional]
+
+		-z, --zero-padding
+			Set how long zero padding (it's apply to every generated file) [optional]
 			
 		-d, --debug
 			Output more info about execution [optional]
@@ -61,6 +64,8 @@ SED_PATTERN=''
 TOP=''
 # footer
 FOOTER=''
+# zero padding
+PADDING=0
 
 BIN=/usr/bin
 
@@ -115,15 +120,21 @@ while true; do
 			BOTTOM=$1
 			shift
 			;;
+		-z|--zero-padding)
+			shift
+			#set how zero padding
+			PADDING=$1
+			shift
+			;;
 		-d|--debug)
 			#set debug mode
-    		DEBUG_OUTPUT=1
-    		shift
-    		;;
+    			DEBUG_OUTPUT=1
+    			shift
+    			;;
         	-h|--help)
             		usage
             		exit
-            	;;
+            		;;
         	*)
             break
             ;;
@@ -160,7 +171,12 @@ do
 	cat tmpHeader > tmpBody
 	cat $f >> tmpBody
 	echo $BOTTOM >> tmpBody
-	CURRENT_PART=`printf "%03d" $LOOP`
+	# if is set pad option
+	if [ $PADDING -gt 0 ]; then
+		CURRENT_PART=`printf "%0"$PADDING"d" $LOOP`
+	else
+		CURRENT_PART=$LOOP
+	fi
 	if [ $DEBUG_OUTPUT -eq 1 ]; then
 		echo -e "\033[1;32m[File $CURRENT_PART.php - OK]\033[0m"
 	fi
