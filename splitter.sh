@@ -153,7 +153,10 @@ if [ "x$FILE_SOURCE" == "x" ]; then
 	exit
 fi
 
-split -d -l $LIMIT $FILE_SOURCE
+
+#split -d -l $LIMIT $FILE_SOURCE
+# -d is not exists on mac ...
+split -l $LIMIT $FILE_SOURCE
 
 # header php in tmp file
 cat << EOF > tmpHeader
